@@ -1,0 +1,12 @@
+git config --global user.name yasminpreciato
+git config --global user.email yasminfpreciato2019@gmail.com
+
+dotnet new sln --name GStore2
+dotnet new mvc -o GStore2
+dotnet sln add GStore2\GStore2.csproj
+
+cd GStore2
+
+dotnet watch run 
+
+
