@@ -6,7 +6,29 @@ dotnet new mvc -o GStore2
 dotnet sln add GStore2\GStore2.csproj
 
 cd GStore2
-
 dotnet watch run 
 
+Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version= 9.0.1
+Microsoft.EntityFrameworkCore" Version= 9.0.1
+Microsoft.EntityFrameworkCore.Design Version= 9.0.1
+Microsoft.EntityFrameworkCore.Tools Version= 9.0.1
+MySql.EntityFrameworkCore Version= 9.0.0
 
+
+Criar a camada de dados (criar as classes na models)
+    Ctegoria
+    Produto
+    ProdutoFoto
+    Usuario
+
+Criar um contexto na pasta Data
+
+Configurar a ConnectionString no appsettings.js
+
+Configurar os seviços de Contexto e Identity no Program.cs
+
+Executar o Xampp e MySql
+
+Abrir o Terminal: Ctrl
+    cd GStore2
+    dotnet watch run
