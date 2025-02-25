@@ -41,4 +41,6 @@ namespace GStore2.Models;
         public decimal  ValorVenda { get; set; }
 
         public bool Destaque { get; set; } = false;
+
+        public List<ProdutoFoto> Fotos { get; set; }
     }
