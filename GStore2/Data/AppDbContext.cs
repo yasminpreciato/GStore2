@@ -51,13 +51,13 @@ namespace GStore2.Data;
       #region Popular Usuario
         Usuario usuario = new(){
           Id = Guid.NewGuid().ToString(),
-          UserName ="GalloJunior",
-          NormalizedUserName = "GALLOJUNIOR",
-          Email = "gallojunior@gmail.com",
-          NormalizedEmail = "GALLOJUNIOR@GMAIL.COM",
+          UserName ="YasminPreciato",
+          NormalizedUserName = "YASMINPRECIATO",
+          Email = "yasminfpreciato2019@gmail.com",
+          NormalizedEmail = "YASMINFPRECIATO2019@GMAIL.COM",
           EmailConfirmed = true,
-          Nome = "jose Atonio Gallo Junior",
-          DataNascimento = DateTime.Parse("05/08/1981"),
+          Nome = "Yasmin Feliciano Preciato",
+          DataNascimento = DateTime.Parse("21/08/2007"),
           LockoutEnabled = true
         };
         PasswordHasher<Usuario> password = new();
