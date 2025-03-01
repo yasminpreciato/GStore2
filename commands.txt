@@ -5,8 +5,8 @@ dotnet new sln --name GStore2
 dotnet new mvc -o GStore2
 dotnet sln add GStore2\GStore2.csproj
 
-cd GStore2
-dotnet watch run 
+    cd GStore2
+    dotnet watch run 
 
 Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version= 9.0.1
 Microsoft.EntityFrameworkCore" Version= 9.0.1
