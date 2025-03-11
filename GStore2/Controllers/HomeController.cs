@@ -41,7 +41,7 @@ public class HomeController : Controller
             Produto = produto
         };
 
-        produtoVM.Produto = _db.Produtos
+        produtoVM.Produtos = _db.Produtos
             .Where(p => p.CategoriaId == produto.CategoriaId && p.Id != produto.Id)
             .Take(4)
             .Include(p => p.Fotos)

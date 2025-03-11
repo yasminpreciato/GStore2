@@ -8,12 +8,13 @@ dotnet sln add GStore2\GStore2.csproj
     cd GStore2
     dotnet watch run 
 
+////////////////////////////////////////////////////////////////////
 Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version= 9.0.1
 Microsoft.EntityFrameworkCore" Version= 9.0.1
 Microsoft.EntityFrameworkCore.Design Version= 9.0.1
 Microsoft.EntityFrameworkCore.Tools Version= 9.0.1
 MySql.EntityFrameworkCore Version= 9.0.0
-
+///////////////////////////////////////////////////////////////////
 
 Criar a camada de dados (criar as classes na models)
     Ctegoria
@@ -32,3 +33,13 @@ Executar o Xampp e MySql
 Abrir o Terminal: Ctrl
     cd GStore2
     dotnet watch run
+
+dotnet tool install --global dotnet-aspnet-codegenerator --Version 9.0.0
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 9.0.0
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 9.0.1
+
+dotnet aspnet-codegenerator controller -name CategoriasController --model Categoria --dataContext AppDbContext --layout "~/Views/Shared/_LayoutAdmin.cshtml" -outDir Controllers
+
+dotnet aspnet-codegenerator controller -name ProdutosController --model Produto --dataContext AppDbContext --layout "~/Views/Shared/_LayoutAdmin.cshtml" -outDir Controllers
