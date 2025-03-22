@@ -68,14 +68,14 @@ namespace GStore2.Controllers
                     string nomeArquivo = categoria.Id + Path.GetExtension(Arquivo.FileName);
                     string caminho = Path.Combine(_host.WebRootPath, "img\\categorias");
                     string novoArquivo = Path.Combine(caminho, nomeArquivo);
-                    using (FileStream stream = new FileStream(novoArquivo, FileMode.Create))
+                    using (var stream = new FileStream(novoArquivo, FileMode.Create))
                     {
                         Arquivo.CopyTo(stream);
                     }
                     categoria.Foto = "\\img\\categorias\\" + nomeArquivo;
                     await _context.SaveChangesAsync();
                 }
-
+                TempData["Success"] = "Categoria Cadastrada com Sucesso!";
                 return RedirectToAction(nameof(Index));
             }
             return View(categoria);
@@ -102,7 +102,7 @@ namespace GStore2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Foto")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Foto")] Categoria categoria, IFormFile Arquivo)
         {
             if (id != categoria.Id)
             {
@@ -113,6 +113,18 @@ namespace GStore2.Controllers
             {
                 try
                 {
+                    if (Arquivo != null)
+                    {
+                        string nomeArquivo = categoria.Id + Path.GetExtension(Arquivo.FileName);
+                        string caminho = Path.Combine(_host.WebRootPath, "img\\categorias");
+                        string novoArquivo = Path.Combine(caminho, nomeArquivo);
+                        using (var stream = new FileStream(novoArquivo, FileMode.Create))
+                        {
+                            Arquivo.CopyTo(stream);
+                        }
+                        categoria.Foto = "\\img\\categorias\\" + nomeArquivo;
+
+                    }
                     _context.Update(categoria);
                     await _context.SaveChangesAsync();
                 }
@@ -127,6 +139,7 @@ namespace GStore2.Controllers
                         throw;
                     }
                 }
+                TempData["Success"] = "Categoria Alterada com Sucesso";
                 return RedirectToAction(nameof(Index));
             }
             return View(categoria);
@@ -162,6 +175,7 @@ namespace GStore2.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["Success"] = "Categoria Excluída com Sucesso!";
             return RedirectToAction(nameof(Index));
         }
 
