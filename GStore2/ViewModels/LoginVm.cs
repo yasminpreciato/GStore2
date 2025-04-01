@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace GStore2.ViewModels;
 
-public class LoginVm
+public class LoginVM
 {
    [Display(Name ="Email ou Nome de Usuário", Prompt ="Informe seu Email ou Nome de Usuário")]
    [Required(ErrorMessage = "Por favor, informe seu email ou nome de usuário")]
