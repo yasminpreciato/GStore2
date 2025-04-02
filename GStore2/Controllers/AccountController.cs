@@ -36,39 +36,40 @@ public class AccountController : Controller
         return View(login);
     }
 
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Login(LoginVM login)
-{
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginVM login)
+    {
         if (ModelState.IsValid)
         {
             string userName = login.Email;
             if (IsValidEmail(login.Email))
             {
-                var user = awalt _userManager.FindByEmailAsync(login.Email);
+                var user = await _userManager.FindByEmailAsync(login.Email);
                 if (user != null)
-                    userName = user.userName;
-            }  
+                    userName = user.UserName;
+            }
 
-            var result = awalt _signInManager.PasswordSignInAsync(
-                userName, login.Senha, login.Lembrar, lockoutDnFailure: true
+            var result = await _signInManager.PasswordSignInAsync(
+                userName, login.Senha, login.Lembrar, lockoutOnFailure: true
             );
-
-            if (result.Succeeded) {
+            if (result.Succeeded)
+            {
                 _logger.LogInformation($"Usuário {login.Email} acessou o sistema");
                 return LocalRedirect(login.UrlRetorno);
             }
-
-            if (result.IsLockedOut){
-                _logger.LoginWarning($"Usuário {login.Email} está bloqueado");
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning($"Usuário {login.Email} está bloqueado");
                 ModelState.AddModelError("", "Sua conta está bloqueada, aguardar alguns minutos e tente novamente!!");
             }
             else
-            if (result.IsNotAllowed) {
-                _logger.LoginWarning($"Usuário {login.Email} não confirmou sua conta");
+            if (result.IsNotAllowed)
+            {
+                _logger.LogWarning($"Usuário {login.Email} não confirmou sua conta");
                 ModelState.AddModelError(string.Empty, "Sua conta não está confirmada, verefique seu email!!");
             }
-            else 
+            else
                 ModelState.AddModelError(string.Empty, "Usuário e/ou Senha Invalidos!!!");
         }
         return View(login);
@@ -79,10 +80,10 @@ public async Task<IActionResult> Login(LoginVM login)
     public async Task<IActionResult> Logout()
     {
         _logger.LogInformation($"Usuário {ClaimTypes.Email} fez logoff");
-        awalt _signInManager.SignOutAsync();
+        await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
-
+    
     public bool IsValidEmail(string email)
     {
         try
