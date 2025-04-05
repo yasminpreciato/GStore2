@@ -53,19 +53,17 @@ public class AccountController : Controller
             var result = await _signInManager.PasswordSignInAsync(
                 userName, login.Senha, login.Lembrar, lockoutOnFailure: true
             );
-            if (result.Succeeded)
-            {
+
+            if (result.Succeeded) {
                 _logger.LogInformation($"Usuário {login.Email} acessou o sistema");
                 return LocalRedirect(login.UrlRetorno);
             }
-            if (result.IsLockedOut)
-            {
+            if (result.IsLockedOut) {
                 _logger.LogWarning($"Usuário {login.Email} está bloqueado");
                 ModelState.AddModelError("", "Sua conta está bloqueada, aguardar alguns minutos e tente novamente!!");
             }
             else
-            if (result.IsNotAllowed)
-            {
+            if (result.IsNotAllowed) {
                 _logger.LogWarning($"Usuário {login.Email} não confirmou sua conta");
                 ModelState.AddModelError(string.Empty, "Sua conta não está confirmada, verefique seu email!!");
             }
@@ -82,6 +80,14 @@ public class AccountController : Controller
         _logger.LogInformation($"Usuário {ClaimTypes.Email} fez logoff");
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+    
+
+     [HttpGet]
+    public IActionResult Registro()
+    {
+        RegistroVM register = new();
+        return View(register);
     }
     
     public bool IsValidEmail(string email)
