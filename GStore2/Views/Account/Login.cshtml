@@ -38,18 +38,19 @@
                     </form>
                 </div>
                 <div class="card-footer text-center py-3">
-                    <div class="small">Novo por aqui?<a href="register.html">Criar sua conta!</a></div>
+                    <div class="small">Novo por aqui? <a asp-action="Registro">Criar sua conta!</a></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial.cshtml"></partial>
     <script type="text/javascript">
         let mensagemErro = '';
         $(".validation-summary-errors ul li").each(function () {
-            mensagemErro += arguments $(this).text() + '<br />';
+            mensagemErro += $(this).text() + '<br />';
         });
         if (mensagemErro != '')
             swal.fire(
