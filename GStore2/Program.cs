@@ -16,10 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(
 );
 
 // Serviço de getão do Usuario - Identity
-builder.Services.AddIdentity<Usuario, IdentityRole>(
-    Options => Options.SignIn.RequireConfirmedEmail = false 
+builder.Services.AddIdentity<Usuario, IdentityRole>(Options => {
+    Options.SignIn.RequireConfirmedEmail = false;
+    Options.User.RequireUniqueEmail = true;
+ 
   
-).AddEntityFrameworkStores<AppDbContext>()
+ }).AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
 
